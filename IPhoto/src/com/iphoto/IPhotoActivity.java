@@ -1,9 +1,15 @@
 package com.iphoto;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 
 public class IPhotoActivity extends Activity {
@@ -12,6 +18,17 @@ public class IPhotoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iphoto);
+        
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getBaseContext(), ImageGridView.class);
+		        intent.putExtra("EXTRA_PATH_LIST", pathList);
+		        startActivity(intent);
+			}
+		});
     }
 
     @Override
@@ -32,4 +49,7 @@ public class IPhotoActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    private Button button;
+    private ArrayList<String> pathList = new ArrayList<String>();
 }
